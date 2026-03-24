@@ -35,7 +35,7 @@ jobs:
         run: |
           mkdir -p deploy/camo-calculator
           cp -r dist/* deploy/camo-calculator/
-          cp static/index.html deploy/index.html
+          cp -r static/* deploy/
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
