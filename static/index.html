@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sega057</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: #0b0d11;
+        color: #e8ecf2;
+        font-family: 'Rajdhani', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        text-align: center;
+        max-width: 480px;
+        padding: 2rem;
+      }
+      .nick {
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: #c8a84e;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+      }
+      .subtitle {
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 0.95rem;
+        color: #808898;
+        margin-bottom: 2.4rem;
+      }
+      h2 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #a2abb9;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        margin-bottom: 1rem;
+      }
+      .projects {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .projects a {
+        display: block;
+        padding: 0.9rem 1.4rem;
+        background: #12161e;
+        border: 1px solid #252c3a;
+        border-radius: 6px;
+        color: #e8ecf2;
+        text-decoration: none;
+        font-size: 1.1rem;
+        font-weight: 600;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+      }
+      .projects a:hover {
+        border-color: #c8a84e;
+        background: #181d28;
+      }
+      .projects .desc {
+        display: block;
+        font-family: 'Share Tech Mono', monospace;
+        font-size: 0.8rem;
+        font-weight: 400;
+        color: #808898;
+        margin-top: 0.25rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="nick">sega057</div>
+      <div class="subtitle">pet projects</div>
+      <h2>Projects</h2>
+      <ul class="projects">
+        <li>
+          <a href="/camo-calculator/">
+            WoT Camo Calculator
+            <span class="desc"
+              >Spotting distance &amp; camouflage calculator for World of
+              Tanks</span
+            >
+          </a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
