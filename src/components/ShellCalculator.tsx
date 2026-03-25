@@ -26,12 +26,12 @@ export default function ShellCalculator() {
         <span className="shell-dist">{distance}</span>
         <span className="shell-unit">
           m — minimum safe distance{' '}
-          <Tooltip text="The minimum distance from which your shell reaches the target before the next spotting check. Based on an estimated spotting tick of ~1/6 second with a 5m safety margin. Formula: D = V_shell / 5.9 − 5 (minimum 50m due to proxy spotting)." />
+          <Tooltip text="The minimum distance from which your shell reaches the target before the next spotting check. Based on an estimated spotting tick of ~1/6 second with a 5m safety margin. Formula: D = V_shell / 6 - 5 (minimum 50m due to proxy spotting)." />
         </span>
       </div>
       <div className="shell-formula">
-        D = (V<sub>shell</sub> / 5.9) &minus; 5 &nbsp;&nbsp;|&nbsp;&nbsp; min 50
-        m (proxy spot)
+        D = (V<sub>shell</sub> / 6) &minus; 5 &nbsp;&nbsp;|&nbsp;&nbsp; min 50 m
+        (proxy spot)
       </div>
       <div className="shell-note">
         The minimum distance from which your shell reaches the target before the

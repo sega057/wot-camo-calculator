@@ -66,5 +66,5 @@ export function calcTickPercent(meters: number): number {
 }
 
 export function calcShellDistance(velocity: number): number {
-  return Math.max(50, Math.round(velocity / 5.9 - 5));
+  return Math.max(50, Math.round(velocity / 6 - 5));
 }

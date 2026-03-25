@@ -47,7 +47,7 @@ export default function FormulasFooter() {
           <strong>Shell travel distance:</strong>
         </p>
         <p>
-          <code>D = (V_shell / 5.9) − 5</code> &nbsp; (min 50 m)
+          <code>D = (V_shell / 6) - 5</code> &nbsp; (min 50 m)
         </p>
       </div>
     </details>
