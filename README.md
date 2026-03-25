@@ -1,73 +1,62 @@
-# React + TypeScript + Vite
+# WoT Camouflage Calculator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A World of Tanks spotting and camouflage calculator. Calculates the exact distance at which an enemy spotter will detect your tank based on your camouflage values, bush cover, movement state, firing mode, and the enemy's view range and equipment.
 
-Currently, two official plugins are available:
+**Live:** [sega057.com/camo-calculator](https://sega057.com/camo-calculator/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Spotting range calculation** for five bush scenarios (80%, 75%, 50%, 25%, no bush) across three firing modes (not firing, behind bush, in bush)
+- **Light tank toggle** — light tanks keep full camo while moving; other classes use separate moving camo values
+- **CVS equipment support** — Commander's Vision System reduces bush and movement camo effectiveness (15% and 20% variants)
+- **Compare mode** — side-by-side comparison of two tank setups against the same spotter, with distance diff badges
+- **Shell velocity calculator** — estimates the minimum safe distance at which your shell reaches the target before the next spotting tick
+- **Formulas reference** — collapsible section at the bottom with all formulas documented
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Formulas
 
-## Expanding the ESLint configuration
+### Spotting range
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+SpotRange = ViewRange − TotalCamo × (ViewRange − 50)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Result clamped to **50–445 m**.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+`TotalCamo` depends on the scenario:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Scenario    | Stationary                                        | Moving                                                       |
+| ----------- | ------------------------------------------------- | ------------------------------------------------------------ |
+| Not firing  | `CamoV/100 + Bush × CVSf`                         | `CamoV_mov/100 × CVSm + Bush × CVSf`                         |
+| Behind bush | `CamoFire/100 + Bush × CVSf`                      | `CamoFire_mov/100 × CVSm + Bush × CVSf`                      |
+| In bush     | `(CamoV/100 + min(Bush, 0.5) × CVSf) × retention` | `(CamoV_mov/100 × CVSm + min(Bush, 0.5) × CVSf) × retention` |
+
+- **retention** = CamoFire / CamoV (ratio of camo kept after firing)
+- **CVSf** (bush factor): None = 1.0, 15% = 0.85, 20% = 0.80
+- **CVSm** (movement factor): None = 1.0, 15% = 0.90, 20% = 0.875
+
+### Shell travel distance
+
+```
+D = V_shell / 6 − 5   (minimum 50 m)
+```
+
+## Tech stack
+
+- React 19 + TypeScript
+- Vite
+- No external UI libraries — single CSS file, dark WoT-themed design
+- Deployed to GitHub Pages via GitHub Actions
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
 ```
